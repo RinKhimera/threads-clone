@@ -4,6 +4,16 @@ import { revalidatePath } from "next/cache"
 import User from "../models/user.model"
 import { connectToDB } from "../mongoose"
 
+export const fetchUser = async (userId: string) => {
+  try {
+    connectToDB()
+
+    return await User.findOne({ id: userId })
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`)
+  }
+}
+
 type UserProps = {
   userId: string
   username: string
@@ -31,7 +41,7 @@ export const updateUser = async ({
         name,
         bio,
         image,
-        onbaorded: true,
+        onboarded: true,
       },
       { upsert: true },
     )
