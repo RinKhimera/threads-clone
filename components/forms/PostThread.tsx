@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { createThread } from "@/lib/actions/thread.action"
+import { createThread } from "@/lib/actions/thread.actions"
 import { CommentValidation, ThreadValidation } from "@/lib/validations/thread"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { usePathname, useRouter } from "next/navigation"
