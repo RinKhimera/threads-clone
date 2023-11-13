@@ -2,11 +2,14 @@
 
 import { FilterQuery, SortOrder } from "mongoose"
 import { revalidatePath } from "next/cache"
+
+import Community from "../models/community.model"
 import Thread from "../models/thread.model"
 import User from "../models/user.model"
+
 import { connectToDB } from "../mongoose"
 
-type UserProps = {
+type Params = {
   userId: string
   username: string
   name: string
@@ -19,11 +22,10 @@ export const fetchUser = async (userId: string) => {
   try {
     connectToDB()
 
-    return await User.findOne({ id: userId })
-    // .populate({
-    //   path: "communities",
-    //   model: Community
-    // })
+    return await User.findOne({ id: userId }).populate({
+      path: "communities",
+      model: Community,
+    })
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`)
   }
@@ -31,15 +33,15 @@ export const fetchUser = async (userId: string) => {
 
 export const updateUser = async ({
   userId,
-  username,
-  name,
   bio,
-  image,
+  name,
   path,
-}: UserProps): Promise<void> => {
-  connectToDB()
-
+  username,
+  image,
+}: Params): Promise<void> => {
   try {
+    connectToDB()
+
     await User.findOneAndUpdate(
       { id: userId },
       {
@@ -69,11 +71,11 @@ export const fetchUserPosts = async (userId: string) => {
       path: "threads",
       model: Thread,
       populate: [
-        // {
-        //   path: "community",
-        //   model: Community,
-        //   select: "name id image _id", // Select the "name" and "_id" fields from the "Community" model
-        // },
+        {
+          path: "community",
+          model: Community,
+          select: "name id image _id", // Select the "name" and "_id" fields from the "Community" model
+        },
         {
           path: "children",
           model: Thread,
