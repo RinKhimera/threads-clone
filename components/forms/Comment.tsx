@@ -7,7 +7,6 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
-// import { createThread } from "@/lib/actions/thread.action"
 import { addCommentToThread } from "@/lib/actions/thread.actions"
 import { CommentValidation } from "@/lib/validations/thread"
 import { zodResolver } from "@hookform/resolvers/zod"
