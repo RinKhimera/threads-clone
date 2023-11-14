@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation"
 
 type Props = {
   threadId: string
-  currentUserId: string
+  currentUserId: string | undefined
   authorId: string
   parentId: string | null
   isComment?: boolean

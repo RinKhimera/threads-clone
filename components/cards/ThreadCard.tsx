@@ -5,7 +5,7 @@ import DeleteThread from "../forms/DeleteThread"
 
 type Props = {
   id: string
-  currentUserId: string
+  currentUserId: string | undefined
   parentId: string | null
   content: string
   author: {
