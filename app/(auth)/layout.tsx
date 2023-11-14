@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs"
+import { dark, shadesOfPurple } from "@clerk/themes"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "../globals.css"
@@ -6,7 +7,7 @@ import "../globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Threads",
+  title: "Threads | Authentification",
   description: "A Next.js 13 Meta Threads Application",
 }
 
@@ -16,13 +17,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: shadesOfPurple,
+      }}
+    >
       <html lang="en">
-        <body className={`${inter.className} bg-dark-1`}>
-          <div className="flex min-h-screen w-full items-center justify-center">
-            {children}
-          </div>
-        </body>
+        <body className={`${inter.className} bg-dark-4`}>{children}</body>
       </html>
     </ClerkProvider>
   )
